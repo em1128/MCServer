@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>서버 관리 페이지</title>
+    <link rel="stylesheet" href="style.css"> <!-- CSS 파일 링크 -->
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="banner.png" alt="마크 서버 배너" class="banner">
+        </header>
+
+        <section class="world-management">
+            <h2>월드 관리</h2>
+            <div></div>
+            <hr>
+            <div></div>
+            <div class="server-control">
+                <div class="button-group">
+                    <button class="server-button open" id="run-mcserver">서버 열기</button>
+                    <button class="server-button backup" id="backup-world">월드 백업</button>
+                    <button class="server-button status" id="check-server">접속 확인</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="server-info">
+            <h2>서버 전달</h2>
+            <hr>
+            <ul>
+                <li><a href="https://airy-freckle-bac.notion.site/37f0215fa7c14312a0bad260fed61f1a?pvs=4" target="_blank">업데이트 공지</a></li>
+                <li><a href="https://airy-freckle-bac.notion.site/108f601f41db8061a9cdf71d7b3e3c65?pvs=4" target="_blank">서버 가이드</a></li>
+                <li><a href="https://discord.gg/ymeVQm77" target="_blank">유저 커뮤니티</a></li>
+            </ul>
+        </section>
+    </div>
+    <script>
+      document.getElementById('run-mcserver').addEventListener('click', () => {
+        fetch('/api/run-mcserver')
+          .then(response => response.text())
+          .then(text => {
+            console.log(text);
+            alert(text);
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('Error executing run-mcserver');
+          });
+      });
+      document.getElementById('backup-world').addEventListener('click', () => {
+        fetch('/api/backup-world')
+          .then(response => response.text())
+          .then(text => {
+            console.log(text);
+            alert(text);
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('Error executing backup-world');
+          });
+      });
+      document.getElementById('check-server').addEventListener('click', () => {
+        fetch('/api/check-server')
+          .then(response => response.text())
+          .then(text => {
+            console.log(text);
+            alert(text);
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('Error executing check-server');
+          });
+      });
+    </script>
+</body>
+</html>
