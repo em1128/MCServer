@@ -45,7 +45,8 @@ router.get('/check-server2', limitMiddle.softLimiter, async (req, res) => {
           console.log(msg);
           res.json({
               online: result.online,
-              players: result.players.online
+              players: result.players.online,
+              max : result.players.max
           });
         } else {
           const msg = '서버가 오프라인 상태입니다.'
