@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { fetchGameStatus } from '../api'; // API 호출 함수
+import { fetchGameStatus, runServer , backupWorld } from '../api'; // API 호출 함수
 import '../css/ServerControlComponent.css';
 import OnlinePlayersDisplay from './onlinePlayersDisplay';
 
