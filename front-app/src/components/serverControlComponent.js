@@ -42,6 +42,7 @@ const ServerControlComponent = () => {
     const handleRunServer = async () => {
         try {
             const data = await runServer();
+            alert('서버를 열고 있습니다...');
         } catch (error) {
             setErrorMessage('데이터를 가져오는 중 오류가 발생했습니다.');
         }
@@ -51,6 +52,7 @@ const ServerControlComponent = () => {
     const handleBackupWorld = async () => {
         try {
             const data = await backupWorld();
+            alert('월드를 백업하고 있습니다...');
         } catch (error) {
             setErrorMessage('데이터를 가져오는 중 오류가 발생했습니다.');
         }
