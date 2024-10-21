@@ -1,11 +1,10 @@
 import './App.css';
+import ServerControlComponent from './components/serverControlComponent';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-
-      </header>
+      <ServerControlComponent/>
     </div>
   );
 }

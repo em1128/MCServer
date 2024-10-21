@@ -49,10 +49,21 @@ app.use(passport.session());
 
 app.use('/api', apiRouter); // 모든 /api 요청을 apiRouter로 보냄
 
-
+app.use((req, res, next) => {
+  const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
+  error.status = 404;
+  next(error);
+});
 // 모든 다른 경로는 React 앱으로 리다이렉트
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
+});
+
+app.use((err, req, res, next) => {
+  res.locals.message = err.message;
+  res.locals.error = process.env.NODE_ENV !== 'production' ? err : {};
+  res.status(err.status || 500);
+  res.render('error');
 });
 
 // 서버 시작

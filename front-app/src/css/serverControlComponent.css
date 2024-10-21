@@ -1,0 +1,65 @@
+/* 모바일 스타일 */
+@media (max-width: 600px) {
+    .server-button {
+        font-size: 2em;      /* 모바일에서 제목 크기 조정 */
+    }
+
+    .server-control {
+        width: 95%;          /* 모바일에서 박스 너비 조정 */
+        padding: 15px;       /* 모바일에서 박스 내 여백 조정 */
+    }
+}
+
+/* 태블릿 스타일 */
+@media (min-width: 601px) and (max-width: 900px) {
+    .server-button {
+        font-size: 2.2em;      /* 태블릿에서 제목 크기 조정 */
+    }
+
+    .server-control {
+        width: 90%;            /* 태블릿에서 박스 너비 조정 */
+        padding: 18px;         /* 태블릿에서 박스 내 여백 조정 */
+    }
+}
+.title{
+    color: #ffcc00;
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+#star{
+    width: 30px;
+    height: auto;
+}
+
+.server-control {
+    background-color: #1e1e1e;
+    padding: 15px;
+    border-radius: 10px;
+    
+    border: 6px solid #ffcc00b2; /* 두께 2px, 실선, 색상 설정 */
+}
+
+.button-group {
+    
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.server-button {
+    font-family: 'ONE-Mobile-POP', sans-serif;
+    background-color: #323232;
+    border: 2px solid #ffcc00;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.server-button:hover {
+    background-color: #ffcc00;
+    color: #000;
+}

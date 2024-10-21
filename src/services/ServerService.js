@@ -32,20 +32,20 @@ exports.run = async (req, res) => findProcessWindows('java.exe', (isFound) => {
         console.log(`stdout: ${stdout}`);
         console.error(`stderr: ${stderr}`);
         
-        res.send('서버 Off.');
+        res.json({message: '서버 Off.'});
     });
     }else{
-        res.send('Server is already opened');
+        res.json({message: '서버가 이미 열려있습니다!'});
     }
 });
 
 exports.backup = async (req, res) => exec(`start "" "${backupPath}"`, (error, stdout, stderr) => {
     if (error) {
       console.error(`exec error: ${error}`);
-      res.status(500).send('Error executing shortcut');
+      res.json({message: '백업 실행 에러!'});
       return;
     }
     console.log(`stdout: ${stdout}`);
     console.error(`stderr: ${stderr}`);
-    res.send('Backup executed');
+    res.json({message: '백업이 완료되었습니다.'});
   });

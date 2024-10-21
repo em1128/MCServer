@@ -17,17 +17,10 @@
           <div></div>
           <hr>
           <div></div>
-          <div class="server-control">
-            <h2 style="display: flex; align-items: center; margin: 0;"><img src="1.png" alt="" style="width: 30px; height: auto;"> 마크 서버 관리기</h2>
-              <div class="button-group">
-                  <button class="server-button open" id="run-mcserver">서버 열기</button>
-                  <button class="server-button backup" id="backup-world">월드 백업</button>
-                  <button class="server-button status" id="check-server">접속 확인</button>
-              </div>
-          </div>
+          <div id="root"></div>
+          
         </section>
 
-        <div id="dataContainer"></div>
         <section class="server-info">
             <h2 style="display: flex; align-items: center;"><img src="2.png" alt="" style="width: 40px; height: auto; margin: 0;">서버 전달</h2>
             <hr>
@@ -41,81 +34,5 @@
 
         </section>
     </div>
-    <script>
-      document.getElementById('run-mcserver').addEventListener('click', () => {
-        fetch('/api/run-mcserver')
-          .then(response => response.text())
-          .then(text => {
-            console.log(text);
-            alert(text);
-          })
-          .catch(error => {
-            console.error('Error:', error);
-            alert('Error executing run-mcserver');
-          });
-      });
-      document.getElementById('backup-world').addEventListener('click', () => {
-        fetch('/api/backup-world')
-          .then(response => response.text())
-          .then(text => {
-            console.log(text);
-            alert(text);
-          })
-          .catch(error => {
-            console.error('Error:', error);
-            alert('Error executing backup-world');
-          });
-      });
-      document.getElementById('check-server').addEventListener('click', () => {
-        fetch('/api/check-server')
-          .then(response => response.text())
-          .then(text => {
-            console.log(text);
-            alert(text);
-            fetchData();
-          })
-          .catch(error => {
-            console.error('Error:', error);
-            alert('Error executing check-server');
-          });
-      });
-// 서버에서 JSON 데이터를 받아오는 함수
-async function fetchData() {
-            try {
-                const response = await fetch('/api/check-server2'); // 서버 API URL
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                displayData(data);
-            } catch (error) {
-                console.error('Failed to fetch data:', error);
-                document.getElementById('dataContainer').innerText = '서버 온라인 확인 불가';
-            }
-        }
-
-        // 받아온 데이터를 화면에 표시하는 함수
-        function displayData(data) {
-            const container = document.getElementById('dataContainer');
-            container.innerHTML = ''; // 기존 내용 초기화
-
-            // JSON 데이터에서 online 여부와 players 수를 추출
-            const onlineStatus = data.online; // 'online' 또는 'offline'
-            const playerCount = data.players;  // 플레이어 수
-            onlineMessage = onlineStatus? '온라인' : '오프라인';
-            playerMessage = playerCount || 0;
-            // 정보를 표시하는 HTML 요소 추가
-            container.innerHTML += `<p>서버가 ${onlineMessage} 상태입니다!</p>`;
-            if(onlineStatus)
-              container.innerHTML += `<p>플레이어 수 : ${playerMessage}</p>`;
-        }
-
-        // 5분마다 데이터를 갱신하는 인터벌 설정 (5분 = 300000ms)
-        setInterval(fetchData, 300000);
-
-        // 페이지가 로드될 때 바로 데이터를 불러옴
-        fetchData();
-
-    </script>
 </body>
 </html>

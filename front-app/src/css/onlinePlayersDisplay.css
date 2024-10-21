@@ -1,0 +1,14 @@
+.sub-title{
+    color: #ffcc00;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    margin: 0;
+}
+#sub-star{
+    width: 20px; 
+    height: auto;
+}
+p{
+    margin: 0;
+}
