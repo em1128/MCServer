@@ -1,24 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { fetchGameStatus, runServer , backupWorld } from '../api'; // API 호출 함수
 import '../css/ServerControlComponent.css';
 import OnlinePlayersDisplay from './onlinePlayersDisplay';
 
 const ServerControlComponent = () => {
-    const [onlineStatus, setOnlineStatus] = useState(false);
-    const [onlinePlayers, setOnlinePlayers] = useState(0);
-    const [maxPlayers, setMaxPlayers] = useState(0);
-    const [errorMessage, setErrorMessage] = useState('');
-
-    useEffect(async () => {
-        const data = await fetchGameStatus(); // 컴포넌트 마운트 시 API 호출
-        setOnlineStatus(data.online);
-        setOnlinePlayers(data.players);
-        setMaxPlayers(data.max);
-        // 5분(300,000ms)마다 API 호출
-        const intervalId = setInterval(() => {
-            fetchGameStatus();
-        }, 300_000); // 300,000ms = 5분
+    const [onlineStatus, setOnlineStatus] = useState();
+    const [onlinePlayers, setOnlinePlayers] = useState();
+    const [maxPlayers, setMaxPlayers] = useState();
+    const [errorMessage, setErrorMessage] = useState();
+    useEffect(() => {
+        try{
+            fetchGameStatus().then(data =>{
+                setOnlineStatus(data.online);
+                setOnlinePlayers(data.players);
+                setMaxPlayers(data.max);
+            });
+            
+        }catch(error){
+            setErrorMessage('데이터를 가져오는 중 오류가 발생했습니다.');
+        }
+        // 1분(60,000ms)마다 API 호출
+        const intervalId = setInterval(async () => {
+            try{
+                const data = await fetchGameStatus();
+                setOnlineStatus(data.online);
+                setOnlinePlayers(data.players);
+                setMaxPlayers(data.max);
+            }catch(error){
+                setErrorMessage('데이터를 가져오는 중 오류가 발생했습니다.');
+            }
+        }, 60_000); // 60,000ms = 1분
         // 클린업 함수로 인터벌 정리
         return () => {
             clearInterval(intervalId);
@@ -28,11 +40,13 @@ const ServerControlComponent = () => {
     // 접속 확인 클릭 시 호출되는 함수
     const handleFetchStatus = async () => {
         try {
+            alert('서버 접속 확인 중입니다...');
             const data = await fetchGameStatus();
             setOnlineStatus(data.online);
             setOnlinePlayers(data.players);
             setMaxPlayers(data.max);
             setErrorMessage('');
+            data.online ? alert(`서버가 온라인 상태입니다!`) : alert(`서버가 오프라인 상태입니다!`);
         } catch (error) {
             setErrorMessage('데이터를 가져오는 중 오류가 발생했습니다.');
         }
@@ -41,20 +55,22 @@ const ServerControlComponent = () => {
     // 서버 열기 클릭 시 호출되는 함수
     const handleRunServer = async () => {
         try {
-            const data = await runServer();
             alert('서버를 열고 있습니다...');
+            const result = await runServer();
+            alert(result.message);
         } catch (error) {
-            setErrorMessage('데이터를 가져오는 중 오류가 발생했습니다.');
+            alert('데이터를 가져오는 중 오류가 발생했습니다.');
         }
     };
 
     // 월드 백업 클릭 시 호출되는 함수
     const handleBackupWorld = async () => {
         try {
-            const data = await backupWorld();
             alert('월드를 백업하고 있습니다...');
+            const result = await backupWorld();
+            alert(result.message);
         } catch (error) {
-            setErrorMessage('데이터를 가져오는 중 오류가 발생했습니다.');
+            alert('데이터를 가져오는 중 오류가 발생했습니다.');
         }
     };
     
