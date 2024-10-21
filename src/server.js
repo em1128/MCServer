@@ -56,7 +56,7 @@ app.use((req, res, next) => {
 });
 // 모든 다른 경로는 React 앱으로 리다이렉트
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
 });
 
 app.use((err, req, res, next) => {

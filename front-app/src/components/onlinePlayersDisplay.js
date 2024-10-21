@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect } from 'react';
 import { fetchGameStatus } from '../api'; // API 호출 함수
 import '../css/onlinePlayersDisplay.css';
 
@@ -8,11 +8,9 @@ const OnlinePlayersDisplay = ({ onlineStatus, onlinePlayers, maxPlayers, errorMe
     const playersTitle = <h2 class="sub-title"><img id="sub-star" src="1.png" alt=""/> 현재 접속 중인 플레이어 수<img id="sub-star" src="1.png" alt=""/></h2>;
     const onlineMessage = onlineStatus ? '온라인' : '오프라인';
 
-    console.log(onlineStatus);
-    console.log(onlinePlayers);
-    console.log(maxPlayers);
     return (
         <div>
+            <hr/>
             {onlineTitle}
             {errorMessage ? (
                 <div>{errorMessage}</div>
@@ -21,6 +19,7 @@ const OnlinePlayersDisplay = ({ onlineStatus, onlinePlayers, maxPlayers, errorMe
             )}
             {onlineStatus ? (
                 <>
+                <hr/>
                 {playersTitle}
                 <div id="players">{`${onlinePlayers} / ${maxPlayers}`}</div>
                 </>
