@@ -1,5 +1,4 @@
-import React, {useState, useEffect } from 'react';
-import { fetchGameStatus } from '../api'; // API 호출 함수
+import React from 'react';
 import '../css/onlinePlayersDisplay.css';
 
 const OnlinePlayersDisplay = ({ onlineStatus, onlinePlayers, maxPlayers, errorMessage }) => {
