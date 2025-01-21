@@ -9,8 +9,13 @@ const mcs = require('node-mcstatus');
 const limitMiddle = require('../middlewares/limiterMW');
 const serverService = require('../services/serverService');
 const controllers = require('../controllers/controllers');
+const userController = require('../controllers/userController');
 
-
+router.post('/users', 
+  userController.addUser);
+router.get('/users', 
+  userController.getUsers);
+  
 // .lnk 파일을 실행하는 라우트
 router.get('/run-mcserver', limitMiddle.hardLimiter, serverService.run);
 // .lnk 파일을 실행하는 라우트
